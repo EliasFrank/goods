@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class AllDaoTest extends GoodsApplicationTests {
-    @Autowired
-    AdminDao adminDao;
 
     @Autowired
     AllDao allDao;
@@ -26,11 +24,15 @@ public class AllDaoTest extends GoodsApplicationTests {
 
     @Test
     public void test() {
-        adminDao.findAll().forEach(System.out::println);
         allDao.findAll().forEach(System.out::println);
         depositoryDao.findAll().forEach(System.out::println);
         goodsDao.findAll().forEach(System.out::println);
         needsDao.findAll().forEach(System.out::println);
         userDao.findAll().forEach(System.out::println);
+    }
+
+    @Test
+    void test1() {
+        System.out.println(userDao.findByTel("18479222222"));
     }
 }

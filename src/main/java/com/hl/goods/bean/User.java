@@ -10,7 +10,7 @@ import javax.persistence.*;
  * @author hl2333
  */
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,10 +29,12 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "email")
-    private String email;
-
     @Column(name = "createTime")
     private String createTime;
 
+    @Column(name = "role")
+    private int role;
+
+    @Column(name = "depositoryId")
+    private int depositoryId;
 }
