@@ -17,13 +17,13 @@ public class Depository {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "[name]")
     private String name;
 
-    @Column(name = "desc")
+    @Column(name = "[desc]")
     private String desc;
 
-    @Column(name = "location")
+    @Column(name = "[location]")
     private String location;
 
     @Column(name = "createTime")

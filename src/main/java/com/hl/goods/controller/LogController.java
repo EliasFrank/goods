@@ -49,9 +49,14 @@ public class LogController {
 
     @PostMapping("/register")
     public String register(User user) {
-        System.out.println(user);
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 
+        if (user.getTel() == null || "".equals(user.getTel().trim())
+                || user.getPassword() == null || "".equals(user.getPassword().trim())
+                || user.getName() == null || "".equals(user.getName().trim()) ) {
+            request.setAttribute("error", "不能有空字段，请重新输入");
+            return "index";
+        }
         user.setCreateTime(TimeEncode.getTime());
         user.setPassword(PasswordEncoder.encode(user.getPassword()));
 

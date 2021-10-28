@@ -20,13 +20,13 @@ public class All {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "[name]")
     private String name;
 
-    @Column(name = "desc")
+    @Column(name = "[desc]")
     private String desc;
 
-    @Column(name = "count")
+    @Column(name = "[count]")
     private int count;
 
     @Column(name = "depositoryId")

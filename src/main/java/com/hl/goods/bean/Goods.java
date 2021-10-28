@@ -20,16 +20,16 @@ public class Goods {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "[name]")
     private String name;
 
-    @Column(name = "desc")
+    @Column(name = "[desc]")
     private String desc;
 
-    @Column(name = "count")
+    @Column(name = "[count]")
     private int count;
 
-    @Column(name = "location")
+    @Column(name = "[location]")
     private String location;
 
     @Column(name = "userId")
@@ -38,6 +38,6 @@ public class Goods {
     @Column(name = "createTime")
     private String createTime;
 
-    @Column(name = "rec")
+    @Column(name = "[rec]")
     private int rec;
 }

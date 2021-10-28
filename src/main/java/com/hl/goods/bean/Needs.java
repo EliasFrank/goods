@@ -20,20 +20,20 @@ public class Needs {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "[name]")
     private String name;
 
-    @Column(name = "desc")
+    @Column(name = "[desc]")
     private String desc;
 
-    @Column(name = "count")
+    @Column(name = "[count]")
     private int count;
 
-    @Column(name = "location")
+    @Column(name = "[location]")
     private String location;
 
-    @Column(name = "tele")
-    private String tele;
+    @Column(name = "tel")
+    private String tel;
 
     @Column(name = "userId")
     private int userId;
@@ -41,6 +41,29 @@ public class Needs {
     @Column(name = "solved")
     private int solved;
 
-    @Column(name = "createTime")
+    @Column(name = "[createTime]")
     private String createTime;
+
+    @Column(name = "[checked]")
+    private int checked;
+
+    /*private String solvedStr;
+
+    private String checkStr;
+
+    public String getSolvedStr() {
+        if (solved == 1) {
+            return "已解决";
+        } else {
+            return "未解决";
+        }
+    }
+
+    public String getCheckStr() {
+        if (check == 1) {
+            return "审核通过";
+        } else {
+            return "审核未通过";
+        }
+    }*/
 }

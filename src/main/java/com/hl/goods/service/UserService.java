@@ -22,4 +22,16 @@ public class UserService {
     public void save(User user) {
         userDao.save(user);
     }
+
+    public User findById(Integer id) {
+        return userDao.findById(id).get();
+    }
+
+    public List<User> findByRole(int i) {
+        return userDao.findByRole(i);
+    }
+
+    public List<User> findByNameLikeAndRole(String s, int i) {
+        return userDao.findByNameLikeAndRole("%" + s + "%", i);
+    }
 }

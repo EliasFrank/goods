@@ -24,7 +24,6 @@
     <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a href="">演示</a>
         <a>
           <cite>导航元素</cite></a>
       </span>
@@ -33,43 +32,29 @@
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
-          <input class="layui-input" placeholder="开始日" name="start" id="start">
-          <input class="layui-input" placeholder="截止日" name="end" id="end">
+        <form class="layui-form layui-col-md12 x-so" action="/admin/status" method="post">
           <div class="layui-input-inline">
-            <select name="contrller">
-              <option>支付状态</option>
-              <option>已支付</option>
-              <option>未支付</option>
+            <select name="check">
+              <option value="-1">审核状态</option>
+              <option value="1">已通过</option>
+              <option value="0">未通过</option>
             </select>
           </div>
           <div class="layui-input-inline">
-            <select name="contrller">
-              <option>支付方式</option>
-              <option>支付宝</option>
-              <option>微信</option>
-              <option>货到付款</option>
+            <select name="solved">
+              <option value="-1">是否解决</option>
+              <option value="1">已解决</option>
+              <option value="0">未解决</option>
             </select>
           </div>
-          <div class="layui-input-inline">
-            <select name="contrller">
-              <option value="">订单状态</option>
-              <option value="0">待确认</option>
-              <option value="1">已确认</option>
-              <option value="2">已收货</option>
-              <option value="3">已取消</option>
-              <option value="4">已完成</option>
-              <option value="5">已作废</option>
-            </select>
-          </div>
-          <input type="text" name="username"  placeholder="请输入订单号" autocomplete="off" class="layui-input">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+          <input type="submit" value="搜索" class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></input>
+          <!--          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>-->
         </form>
       </div>
       <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./order-add.html')"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+<!--        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>-->
+<!--        <button class="layui-btn" onclick="x_admin_show('添加用户','./order-add.html')"><i class="layui-icon"></i>添加</button>-->
+        <span class="x-right" style="line-height:40px" th:text = "'共有数据：' + ${count} + '条'"></span>
       </xblock>
       <table class="layui-table">
         <thead>
@@ -77,39 +62,41 @@
             <th>
               <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th>订单编号</th>
-            <th>收货人</th>
-            <th>总金额</th>
-            <th>应付金额</th>
-            <th>订单状态</th>
-            <th>支付状态</th>
-            <th>发货状态</th>
-            <th>支付方式</th>
-            <th>配送方式</th>
-            <th>下单时间</th>
-            <th >操作</th>
+            <th>编号</th>
+            <th>所需物品</th>
+            <th>求助用户ID</th>
+            <th>描述</th>
+            <th>数量</th>
+            <th>收货地点</th>
+            <th>联系电话</th>
+            <th>求助时间</th>
+            <th>是否通过审核</th>
+            <th>是否解决</th>
+            <th>操作</th>
             </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr th:each="need:${needs}">
             <td>
               <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>2017009171822298053</td>
-            <td>老王:18925139194</td>
-            <td>7829.10</td>
-            <td>7854.10</td>
-            <td>待确认</td>
-            <td>未支付</td>
-            <td>未发货</td>
-            <td>其他方式</td>
-            <td>申通物流</td>
-            <td>2017-08-17 18:22</td>
+            <td th:text="${need.id}"></td>
+            <td th:text="${need.name}"></td>
+            <td th:text="${need.userId}"></td>
+            <td th:text="${need.desc}"></td>
+            <td th:text="${need.count}"></td>
+            <td th:text="${need.location}"></td>
+            <td th:text="${need.tel}"></td>
+            <td th:text="${need.createTime}"></td>
+            <td th:if="${need.checked eq 0}">未审核</td>
+            <td th:if="${need.checked eq 1}">通过审核</td>
+            <td th:if="${need.solved eq 0}">未解决</td>
+            <td th:if="${need.solved eq 1}">已解决</td>
             <td class="td-manage">
-              <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
+              <a th:if="${need.checked eq 0}" title="通过审核" th:href="@{'checked?id=' + ${need.id}}">
                 <i class="layui-icon">&#xe63c;</i>
               </a>
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+              <a th:if="${need.solved eq 0} and ${need.checked eq 1}"  title="标记为已解决" th:href="@{'solved?id=' + ${need.id}}">
                 <i class="layui-icon">&#xe640;</i>
               </a>
             </td>
@@ -119,10 +106,9 @@
       <div class="page">
         <div>
           <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
+          <span class="current">1</span>
+          <a class="num" href="">2</a>
           <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
           <a class="next" href="">&gt;&gt;</a>
         </div>
       </div>
