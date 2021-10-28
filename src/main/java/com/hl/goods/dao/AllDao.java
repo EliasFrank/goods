@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 /**
  * @author hl2333
  */
-public interface AllDao extends JpaRepository<All, Long>, JpaSpecificationExecutor<All>{
+public interface AllDao extends JpaRepository<All, Integer>, JpaSpecificationExecutor<All>{
 }

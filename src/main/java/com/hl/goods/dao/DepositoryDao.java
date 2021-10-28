@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 /**
  * @author hl2333
  */
-public interface DepositoryDao extends JpaRepository<Depository, Long>, JpaSpecificationExecutor<Depository> {
+public interface DepositoryDao extends JpaRepository<Depository, Integer>, JpaSpecificationExecutor<Depository> {
 }

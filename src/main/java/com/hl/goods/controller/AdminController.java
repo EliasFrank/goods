@@ -1,8 +1,11 @@
 package com.hl.goods.controller;
 
+import com.hl.goods.bean.Depository;
 import com.hl.goods.bean.Needs;
 import com.hl.goods.bean.User;
+import com.hl.goods.dao.DepositoryDao;
 import com.hl.goods.dao.UserDao;
+import com.hl.goods.service.DepositoryService;
 import com.hl.goods.service.NeedsService;
 import com.hl.goods.service.UserService;
 import com.hl.goods.util.PasswordEncoder;
@@ -33,8 +36,40 @@ public class AdminController {
     @Autowired
     private NeedsService needsService;
 
+    @Autowired
+    private DepositoryService depositoryService;
+
     private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
+    @PostMapping("depEdit")
+    public ModelAndView depEditer(Depository depository, ModelAndView mv) {
+        User user = getUser();
+        if (user == null || user.getRole() == 0) {
+            mv.setViewName("/index");
+            mv.addObject("error", "你还未登录或者没有管理员权限");
+            return mv;
+        }
+        Depository origin = depositoryService.findById(depository.getId());
+        origin.setName(depository.getName());
+        origin.setDesc(depository.getDesc());
+        origin.setLocation(depository.getLocation());
+        depositoryService.save(origin);
+        mv.setViewName("redirect:/admin/depository");
+        return mv;
+    }
+    @GetMapping("depEdit")
+    public ModelAndView depEdit(ModelAndView mv) {
+        User user = getUser();
+        if (user == null || user.getRole() == 0) {
+            mv.setViewName("/index");
+            mv.addObject("error", "你还未登录或者没有管理员权限");
+            return mv;
+        }
+        Depository depository = depositoryService.findById(user.getDepositoryId());
+        mv.addObject("dep", depository);
+        mv.setViewName("admin/admin-edit");
+        return mv;
+    }
     @PostMapping("modify")
     public ModelAndView modify(String tel, String name, String password, ModelAndView mv) {
         User user = getUser();
@@ -134,6 +169,20 @@ public class AdminController {
         mv.addObject("users", users);
         mv.addObject("count", users.size());
         mv.setViewName("admin/member-list");
+        return mv;
+    }
+
+    @GetMapping("depository")
+    public ModelAndView getDepository(ModelAndView mv){
+        User user = getUser();
+        if (user == null || user.getRole() == 0) {
+            mv.setViewName("/index");
+            mv.addObject("error", "你还未登录或者没有管理员权限");
+            return mv;
+        }
+        Depository depository = depositoryService.findById(user.getDepositoryId());
+        mv.addObject("dep", depository);
+        mv.setViewName("admin/admin-list");
         return mv;
     }
 
