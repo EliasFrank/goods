@@ -39,6 +39,7 @@
         </form>
       </div>
       <xblock>
+<!--        <button class="layui-btn" onclick="x_admin_show('添加物资','./admin-add.html')"><i class="layui-icon"></i>添加</button>-->
 <!--        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>-->
         <span class="x-right" style="line-height:40px" th:text = "'共有数据：' + ${count} + '条'"></span>
       </xblock>
@@ -54,7 +55,7 @@
           <th>数量</th>
           <th>更新时间</th>
           <th>所属仓库</th>
-          <th>操作</th>
+<!--          <th>操作</th>-->
         </thead>
         <tbody>
         <tr th:each="good:${goods}">
@@ -69,23 +70,20 @@
           <td th:text="${good.createTime}"></td>
           <td th:each="dep:${deps}" th:if="${dep.id eq good.depositoryId}" th:text="${dep.name}"></td>
 
-          <td class="td-manage">
-<!--            <a th:if="${good.rec eq 0}" title="确认已接收" th:href="@{'goodCheck?id=' + ${good.id}}">-->
-<!--              <i class="layui-icon">&#xe601;确认</i>-->
-<!--            </a>-->
-<!--            <a th:if="${good.rec eq 1}" title="已接收，无法操作">-->
-<!--              <i class="layui-icon">&#xe640;已接收</i>-->
-<!--            </a>-->
-            <a title="增加"  onclick="x_admin_show('增加','role-add.html')" href="javascript:;">
+          <!--<td class="td-manage">
+            <a th:if="${good.rec eq 0}" title="确认已接收" th:href="@{'goodCheck?id=' + ${good.id}}">
+              <i class="layui-icon">&#xe601;确认</i>
+            </a>
+            <a th:if="${good.rec eq 1}" title="已接收，无法操作">
+              <i class="layui-icon">&#xe640;已接收</i>
+            </a>
+            <a title="修改数量"  onclick="x_admin_show('增加','role-add.html')" href="javascript:;">
               <i class="layui-icon">&#xe642;</i>
             </a>
-            <a title="删除"  onclick="x_admin_show('删除','role-add.html')" href="javascript:;">
-              <i class="layui-icon">&#xe642;</i>
-            </a>
-            <!--<a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+            <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
               <i class="layui-icon">&#xe640;</i>
-            </a>-->
-          </td>
+            </a>
+          </td>-->
         </tr>
         </tbody>
       </table>

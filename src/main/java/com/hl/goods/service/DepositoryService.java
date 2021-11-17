@@ -5,6 +5,8 @@ import com.hl.goods.dao.DepositoryDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author hl2333
  */
@@ -19,5 +21,9 @@ public class DepositoryService {
 
     public void save(Depository depository) {
         depositoryDao.save(depository);
+    }
+
+    public List<Depository> findAll() {
+        return depositoryDao.findAll();
     }
 }

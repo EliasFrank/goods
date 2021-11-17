@@ -1,18 +1,16 @@
 package com.hl.goods.controller;
 
-import com.hl.goods.bean.Depository;
-import com.hl.goods.bean.Needs;
-import com.hl.goods.bean.User;
+import com.hl.goods.bean.*;
 import com.hl.goods.dao.DepositoryDao;
 import com.hl.goods.dao.UserDao;
-import com.hl.goods.service.DepositoryService;
-import com.hl.goods.service.NeedsService;
-import com.hl.goods.service.UserService;
+import com.hl.goods.service.*;
 import com.hl.goods.util.PasswordEncoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.PriorityQueue;
 
 /**
  * @author hl2333
@@ -37,10 +36,104 @@ public class AdminController {
     private NeedsService needsService;
 
     @Autowired
+    private GoodsService goodsService;
+
+    @Autowired
+    private AllService allService;
+
+    @Autowired
     private DepositoryService depositoryService;
 
     private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
+    @GetMapping("goodCheck")
+//    @Transactional(rollbackFor = {Exception.class})
+    public ModelAndView goodCheck(Integer id, ModelAndView mv) {
+        User user = getUser();
+        if (user == null || user.getRole() == 0) {
+            mv.setViewName("/index");
+            mv.addObject("error", "你还未登录或者没有管理员权限");
+            return mv;
+        }
+
+        goodsService.goodCheck(id);
+
+        List<Goods> goods = goodsService.findAll();
+        mv.addObject("goods", goods);
+        mv.addObject("count", goods.size());
+        mv.setViewName("admin/admin-role");
+        return mv;
+    }
+    @GetMapping("goods")
+    public ModelAndView goods(ModelAndView mv){
+        User user = getUser();
+        if (user == null || user.getRole() == 0) {
+            mv.setViewName("/index");
+            mv.addObject("error", "你还未登录或者没有管理员权限");
+            return mv;
+        }
+
+        List<Goods> goods = goodsService.findAll();
+//        List<User> users = userService.findByGoods(goods);
+        List<User> users = userService.findAll();
+        mv.addObject("goods", goods);
+        mv.addObject("users", users);
+        mv.addObject("count", goods.size());
+        mv.setViewName("admin/admin-role");
+        return mv;
+    }
+    @GetMapping("allGoods")
+    public ModelAndView allGoods(ModelAndView mv){
+        User user = getUser();
+        if (user == null || user.getRole() == 0) {
+            mv.setViewName("/index");
+            mv.addObject("error", "你还未登录或者没有管理员权限");
+            return mv;
+        }
+
+        List<All> all = allService.findAll();
+        List<Depository> deps = depositoryService.findAll();
+        mv.addObject("goods", all);
+        mv.addObject("deps", deps);
+        mv.addObject("count", all.size());
+        mv.setViewName("admin/admin-cate");
+        return mv;
+    }
+    @PostMapping("searchGoods")
+    public ModelAndView searchGoods(String name, ModelAndView mv){
+        User user = getUser();
+        if (user == null || user.getRole() == 0) {
+            mv.setViewName("/index");
+            mv.addObject("error", "你还未登录或者没有管理员权限");
+            return mv;
+        }
+
+        List<All> all = allService.findByNameLike(name);
+        List<Depository> deps = depositoryService.findAll();
+        mv.addObject("goods", all);
+        mv.addObject("deps", deps);
+        mv.addObject("count", all.size());
+        mv.setViewName("admin/admin-cate");
+        return mv;
+    }
+    @PostMapping("goods")
+    public ModelAndView goodsByName(@Param("username") String username, ModelAndView mv){
+        User user = getUser();
+        if (user == null || user.getRole() == 0) {
+            mv.setViewName("/index");
+            mv.addObject("error", "你还未登录或者没有管理员权限");
+            return mv;
+        }
+//        logger.debug(username);
+        List<Goods> goods = goodsService.findByName(username);
+//        List<User> users = userService.findByGoods(goods);
+        List<User> users = userService.findAll();
+        mv.addObject("goods", goods);
+        mv.addObject("users", users);
+        mv.addObject("count", goods.size());
+        mv.setViewName("admin/admin-role");
+        return mv;
+    }
     @PostMapping("depEdit")
     public ModelAndView depEditer(Depository depository, ModelAndView mv) {
         User user = getUser();

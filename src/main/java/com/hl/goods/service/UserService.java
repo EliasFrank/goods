@@ -1,5 +1,6 @@
 package com.hl.goods.service;
 
+import com.hl.goods.bean.Goods;
 import com.hl.goods.bean.User;
 import com.hl.goods.dao.UserDao;
 import com.hl.goods.util.PasswordEncoder;
@@ -33,5 +34,17 @@ public class UserService {
 
     public List<User> findByNameLikeAndRole(String s, int i) {
         return userDao.findByNameLikeAndRole("%" + s + "%", i);
+    }
+
+    public List<User> findByGoods(List<Goods> goods) {
+        List<User> users = new ArrayList<>();
+        for (Goods good : goods) {
+            users.add(userDao.findById(good.getUserId()).get());
+        }
+        return users;
+    }
+
+    public List<User> findAll() {
+        return userDao.findAll();
     }
 }

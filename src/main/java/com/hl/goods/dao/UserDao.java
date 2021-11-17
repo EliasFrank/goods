@@ -31,4 +31,6 @@ public interface UserDao extends JpaRepository<User, Integer>, JpaSpecificationE
      * @return r
      */
     List<User> findByNameLikeAndRole(String name, int role);
+
+    List<User> findByNameLike(String s);
 }
