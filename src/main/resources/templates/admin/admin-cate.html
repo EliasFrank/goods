@@ -24,7 +24,7 @@
     <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a href="">演示</a>
+<!--        <a href="">演示</a>-->
         <a>
           <cite>导航元素</cite></a>
       </span>
@@ -33,50 +33,68 @@
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so layui-form-pane">
-          <input class="layui-input" placeholder="分类名" name="cate_name">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon"></i>增加</button>
+        <form class="layui-form layui-col-md12 x-so layui-form-pane" action="/admin/searchGoods" method="post">
+          <input class="layui-input" placeholder="物品名称" name="name">
+          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon"></i>搜索</button>
         </form>
       </div>
       <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+<!--        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>-->
+        <span class="x-right" style="line-height:40px" th:text = "'共有数据：' + ${count} + '条'"></span>
       </xblock>
       <table class="layui-table">
         <thead>
-          <tr>
-            <th>
-              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
-            <th>ID</th>
-            <th>分类名</th>
-            <th>操作</th>
+        <tr>
+          <!--<th>
+            <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+          </th>-->
+          <th>ID</th>
+          <th>物品</th>
+          <th>描述</th>
+          <th>数量</th>
+          <th>更新时间</th>
+          <th>所属仓库</th>
+          <th>操作</th>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>
-            <td>1</td>
-            <td>会员相关</td>
-            <td class="td-manage">
-              <a title="编辑"  onclick="x_admin_show('编辑','admin-edit.html')" href="javascript:;">
-                <i class="layui-icon">&#xe642;</i>
-              </a>
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
-              </a>
-            </td>
-          </tr>
+        <tr th:each="good:${goods}">
+          <!--<td>
+            <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+          </td>-->
+          <td th:text="${good.id}"></td>
+          <td th:text="${good.name}"></td>
+          <td th:text="${good.desc}"></td>
+          <td th:text="${good.count}"></td>
+
+          <td th:text="${good.createTime}"></td>
+          <td th:each="dep:${deps}" th:if="${dep.id eq good.depositoryId}" th:text="${dep.name}"></td>
+
+          <td class="td-manage">
+<!--            <a th:if="${good.rec eq 0}" title="确认已接收" th:href="@{'goodCheck?id=' + ${good.id}}">-->
+<!--              <i class="layui-icon">&#xe601;确认</i>-->
+<!--            </a>-->
+<!--            <a th:if="${good.rec eq 1}" title="已接收，无法操作">-->
+<!--              <i class="layui-icon">&#xe640;已接收</i>-->
+<!--            </a>-->
+            <a title="增加"  onclick="x_admin_show('增加','role-add.html')" href="javascript:;">
+              <i class="layui-icon">&#xe642;</i>
+            </a>
+            <a title="删除"  onclick="x_admin_show('删除','role-add.html')" href="javascript:;">
+              <i class="layui-icon">&#xe642;</i>
+            </a>
+            <!--<a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+              <i class="layui-icon">&#xe640;</i>
+            </a>-->
+          </td>
+        </tr>
         </tbody>
       </table>
       <div class="page">
         <div>
           <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
+          <span class="current">1</span>
+          <a class="num" href="">2</a>
           <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
           <a class="next" href="">&gt;&gt;</a>
         </div>
       </div>

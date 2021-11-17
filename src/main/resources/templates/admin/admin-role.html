@@ -24,7 +24,7 @@
     <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a href="">演示</a>
+<!--        <a href="">演示</a>-->
         <a>
           <cite>导航元素</cite></a>
       </span>
@@ -33,52 +33,62 @@
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
-          <input class="layui-input" placeholder="开始日" name="start" id="start">
-          <input class="layui-input" placeholder="截止日" name="end" id="end">
+        <form class="layui-form layui-col-md12 x-so" action="/admin/goods" method="post">
+<!--          <input class="layui-input" placeholder="开始日" name="start" id="start">-->
+<!--          <input class="layui-input" placeholder="截止日" name="end" id="end">-->
           <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+          <input type="submit" value="搜索" class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></input>
         </form>
       </div>
       <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./role-add.html')"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+<!--        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>-->
+<!--        <button class="layui-btn" onclick="x_admin_show('添加用户','./role-add.html')"><i class="layui-icon"></i>添加</button>-->
+        <span class="x-right" style="line-height:40px" th:text = "'共有数据：' + ${count} + '条'"></span>
       </xblock>
       <table class="layui-table">
         <thead>
           <tr>
-            <th>
+            <!--<th>
               <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
+            </th>-->
             <th>ID</th>
-            <th>角色名</th>
-            <th>拥有权限规则</th>
+            <th>物品</th>
             <th>描述</th>
-            <th>状态</th>
-            <th>操作</th>
+            <th>数量</th>
+            <th>用户名</th>
+            <th>捐赠时间</th>
+            <th>捐赠地点</th>
+            <th>物品是否签收</th>
+            <th>确认签收</th>
         </thead>
         <tbody>
-          <tr>
-            <td>
+          <tr th:each="good:${goods}">
+            <!--<td>
               <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>
-            <td>1</td>
-            <td>超级管理员</td>
-            <td>会员列表，问题列表</td>
-            <td>具有至高无上的权利</td>
-            <td class="td-status">
-              <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+            </td>-->
+            <td th:text="${good.id}"></td>
+            <td th:text="${good.name}"></td>
+            <td th:text="${good.desc}"></td>
+            <td th:text="${good.count}"></td>
+
+            <td th:each="user:${users}" th:if="${user.id eq good.userId}" th:text="${user.name}"></td>
+            <td th:text="${good.createTime}"></td>
+            <td th:text="${good.location}"></td>
+            <td th:if="${good.rec eq 0}">未接收</td>
+            <td th:if="${good.rec eq 1}">已接收</td>
             <td class="td-manage">
-              <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
-                <i class="layui-icon">&#xe601;</i>
+              <a th:if="${good.rec eq 0}" title="确认已接收" th:href="@{'goodCheck?id=' + ${good.id}}">
+                <i class="layui-icon">&#xe601;确认</i>
               </a>
-              <a title="编辑"  onclick="x_admin_show('编辑','role-add.html')" href="javascript:;">
+              <a th:if="${good.rec eq 1}" title="已接收，无法操作">
+                <i class="layui-icon">&#xe640;已接收</i>
+              </a>
+              <!--<a title="编辑"  onclick="x_admin_show('编辑','role-add.html')" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>
               <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>
-              </a>
+              </a>-->
             </td>
           </tr>
         </tbody>
@@ -86,10 +96,9 @@
       <div class="page">
         <div>
           <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
+          <span class="current">1</span>
+          <a class="num" href="">2</a>
           <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
           <a class="next" href="">&gt;&gt;</a>
         </div>
       </div>
