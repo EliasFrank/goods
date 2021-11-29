@@ -36,7 +36,7 @@ public class LogController {
         }
         request.getSession().setAttribute("user", user);
         if (user.getRole() == 0)
-            return "user/start";
+            return "redirect:user/homePage";
         return "admin/center";
     }
 
