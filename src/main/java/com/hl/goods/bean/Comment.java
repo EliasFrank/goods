@@ -26,4 +26,10 @@ public class Comment {
 
     @Column(name = "[content]")
     private String content;
+
+    @Column(name = "[userId]")
+    private int userId;
+
+    @Column(name = "[createTime]")
+    private String createTime;
 }

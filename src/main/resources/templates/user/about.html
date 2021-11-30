@@ -27,24 +27,23 @@
             <a href="javascript:;" class="blog-user layui-hide">
                 <img src="../../static/images/Absolutely.jpg" alt="Absolutely" title="Absolutely" />
             </a>
-            <!-- 不落阁 -->
-            <a class="blog-logo" href="home.html">不落阁</a>
+            <a class="blog-logo" href="/user/homePage">物资捐赠网</a>
             <!-- 导航菜单 -->
             <ul class="layui-nav" lay-filter="nav">
                 <li class="layui-nav-item">
-                    <a href="home.html"><i class="fa fa-home fa-fw"></i>&nbsp;网站首页</a>
+                    <a href="/user/homePage"><i class="fa fa-home fa-fw"></i>&nbsp;网站首页</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="article.html"><i class="fa fa-file-text fa-fw"></i>&nbsp;文章专栏</a>
+                    <a href="/user/article"><i class="fa fa-file-text fa-fw"></i>&nbsp;发布求助</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="resource.html"><i class="fa fa-tags fa-fw"></i>&nbsp;资源分享</a>
+                    <a href="/user/resource"><i class="fa fa-tags fa-fw"></i>&nbsp;资源分享</a>
                 </li>
-                <li class="layui-nav-item">
-                    <a href="timeline.html"><i class="fa fa-hourglass-half fa-fw"></i>&nbsp;点点滴滴</a>
-                </li>
+                <!--<li class="layui-nav-item">
+                    <a href="/user/timeline"><i class="fa fa-hourglass-half fa-fw"></i>&nbsp;点点滴滴</a>
+                </li>-->
                 <li class="layui-nav-item layui-this">
-                    <a href="about.html"><i class="fa fa-info fa-fw"></i>&nbsp;关于本站</a>
+                    <a href="/user/about"><i class="fa fa-info fa-fw"></i>&nbsp;关于本站</a>
                 </li>
             </ul>
             <!-- 手机和平板的导航开关 -->
@@ -57,78 +56,80 @@
     <div class="blog-body">
         <div class="blog-container">
             <blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow">
-                <a href="home.html" title="网站首页">网站首页</a>
+                <a href="/user/homePage" title="网站首页">网站首页</a>
                 <a><cite>关于本站</cite></a>
             </blockquote>
             <div class="blog-main">
                 <div class="layui-tab layui-tab-brief shadow" lay-filter="tabAbout">
                     <ul class="layui-tab-title">
-                        <li lay-id="1">关于博客</li>
+                        <li lay-id="1">关于网站</li>
                         <li lay-id="2">关于作者</li>
-                        <li lay-id="3" id="frinedlink">友情链接</li>
-                        <li lay-id="4">留言墙</li>
+                        <!--<li lay-id="3" id="frinedlink">友情链接</li>
+                        <li lay-id="4">留言墙</li>-->
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item">
                             <div class="aboutinfo">
-                                <div class="aboutinfo-figure">
+                                <!--<div class="aboutinfo-figure">
                                     <img src="../images/Logo_100.png" alt="不落阁" />
-                                </div>
-                                <p class="aboutinfo-nickname">不落阁</p>
-                                <p class="aboutinfo-introduce">一个.NET程序员的个人博客，记录博主学习和成长之路，分享.NET方面技术和源码</p>
-                                <p class="aboutinfo-location"><i class="fa fa-link"></i>&nbsp;&nbsp;<a target="_blank" href="http://www.lyblogs.cn">www.lyblogs.cn</a></p>
+                                </div>-->
+                                <p class="aboutinfo-nickname">物资捐赠网</p>
+                                <p class="aboutinfo-introduce">一个分享爱心的网站</p>
+<!--                                <p class="aboutinfo-location"><i class="fa fa-link"></i>&nbsp;&nbsp;<a target="_blank" href="http://www.lyblogs.cn">www.lyblogs.cn</a></p>-->
                                 <hr />
                                 <div class="aboutinfo-contact">
-                                    <a target="_blank" title="网站首页" href="home.html"><i class="fa fa-home fa-2x" style="font-size:2.5em;position:relative;top:3px"></i></a>
-                                    <a target="_blank" title="文章专栏" href="article.html"><i class="fa fa-file-text fa-2x"></i></a>
-                                    <a target="_blank" title="资源分享" href="resource.html"><i class="fa fa-tags fa-2x"></i></a>
-                                    <a target="_blank" title="点点滴滴" href="timeline.html"><i class="fa fa-hourglass-half fa-2x"></i></a>
+                                    <a target="_blank" title="网站首页" href="/user/homePage"><i class="fa fa-home fa-2x" style="font-size:2.5em;position:relative;top:3px"></i></a>
+                                    <a target="_blank" title="发布求助" href="/user/article"><i class="fa fa-file-text fa-2x"></i></a>
+                                    <a target="_blank" title="资源分享" href="/user/resource"><i class="fa fa-tags fa-2x"></i></a>
+<!--                                    <a target="_blank" title="点点滴滴" href="/user/timeline.html"><i class="fa fa-hourglass-half fa-2x"></i></a>-->
                                 </div>
 
                                 <fieldset class="layui-elem-field layui-field-title">
                                     <legend>简介</legend>
                                     <div class="layui-field-box aboutinfo-abstract">
-                                        <p style="text-align:center;">不落阁是一个由ASP.NET MVC开发的个人博客网站，诞生于2016年11月7日，起劲为止经历了一次大改，暂且称为不落阁2.0。</p>
-                                        <h1>第一个版本</h1>
-                                        <p>诞生的版本，采用ASP.NET MVC + Entity Framework作为后台框架，前端几乎自己手写，用了Bootstrap的栅格系统来布局！起初并没有注意美工，只打算完成基本的功能，故视觉体验是比较差的。</p>
-                                        <h1>第二个版本</h1>
-                                        <p>由于感觉EF查询数据的时候较慢（后来发现是自己搞错了），于是自己写了个ORM，其实也算不上ORM，就是将ADO.NET进行封装，再封装，再利用反射将数据库表与实体类一一对应，有了基本的增删改查、事务、自动建表等功能，同时为了配合这个ORM，将项目改成三层，前端方面加入了Animate.css的动画效果，同时自己手写了几个动画，并制作了浅色于深色两种主题的样式，视觉体验稍有提高。</p>
-                                        <h1>当前版本</h1>
-                                        <p>从公司的一个后台管理系统的前端发现了Layer弹窗插件，于是追根溯源，发现了Layui前端框架！Layui简洁的风格让我很是喜欢，于是决定再次将网站改版！此次改版从里到外几乎全部更新。后台增加了面向接口开发，使用了IOC框架，同时ORM回归到Entity Framework，前端则移除Bootstarp，引入Layui。视觉体验显著提高。</p>
-                                        <h1 style="text-align:center;">The End</h1>
+                                        <p style="text-align:center;">物资捐赠网是一个关注捐款只能捐钱这一痛点的网站，本站实行物资管理的透明化，所有物资来源和去处都会进行详细的登记。只愿天下少灾少难，贡献自己一点绵薄之力</p>
+                                        <h1>灾难</h1>
+                                        <p>在某地方遭受天灾，比如暴雨洪水、地震等灾害时。我们秉承“一方有难，八方支援“的精神，但是能够奉献爱心的渠道比较少，而且大部分都是捐款。可是将捐款转化为灾区需要的物资需要一定的时间。灾区本地的物资很快可能就被消耗殆尽，需要别的地方的支援。</p>
+                                        <h1>杂物</h1>
+                                        <p>大家在生活中，总会有一些自己已经用不上了，但是仍然有用的一些物品。这些东西丢了可惜，留着又太占用家里的空间。</p>
+                                        <h1>网站</h1>
+                                        <p>本站旨在收集大家平时用不上的物品，存放在全国各个仓库中。当某个灾区急需某些物品的时候，我们将最近仓库的物品运送过去，用于救援工作。极大的省下了采购物资的时间。也降低了救援成本。</p>
+                                        <h1 style="text-align:center;">如果人人都献出一点爱</h1>
                                     </div>
                                 </fieldset>
                             </div>
                         </div><!--关于网站End-->
                         <div class="layui-tab-item">
                             <div class="aboutinfo">
-                                <div class="aboutinfo-figure">
+                                <!--<div class="aboutinfo-figure">
                                     <img src="../images/Absolutely.jpg" alt="Absolutely" />
-                                </div>
-                                <p class="aboutinfo-nickname">Absolutely</p>
-                                <p class="aboutinfo-introduce">一枚90后程序员，.NET开发工程师，主攻B/S架构，略懂Web前端</p>
-                                <p class="aboutinfo-location"><i class="fa fa-location-arrow"></i>&nbsp;四川 - 成都</p>
+                                </div>-->
+                                <p class="aboutinfo-nickname">后来</p>
+                                <p class="aboutinfo-introduce">江西农业大学学生</p>
+                                <p class="aboutinfo-location"><i class="fa fa-location-arrow"></i>&nbsp;江西</p>
                                 <hr />
                                 <div class="aboutinfo-contact">
-                                    <a target="_blank" title="QQ交流" href="javascript:layer.msg('启动QQ会话窗口')"><i class="fa fa-qq fa-2x"></i></a>
-                                    <a target="_blank" title="给我写信" href="javascript:layer.msg('启动邮我窗口')"><i class="fa fa-envelope fa-2x"></i></a>
-                                    <a target="_blank" title="新浪微博" href="javascript:layer.msg('转到你的微博主页')"><i class="fa fa-weibo fa-2x"></i></a>
-                                    <a target="_blank" title="码云" href="javascript:layer.msg('转到你的github主页')"><i class="fa fa-git fa-2x"></i></a>
+                                    <a target="_blank" title="QQ交流" ><i class="fa fa-qq fa-2x"></i></a>
+                                    <a target="_blank" title="给我写信"><i class="fa fa-envelope fa-2x"></i></a>
+                                    <a target="_blank" title="新浪微博" ><i class="fa fa-weibo fa-2x"></i></a>
+                                    <a target="_blank" title="码云"><i class="fa fa-git fa-2x"></i></a>
                                 </div>
                                 <fieldset class="layui-elem-field layui-field-title">
                                     <legend>简介</legend>
                                     <div class="layui-field-box aboutinfo-abstract abstract-bloger">
-                                        <p style="text-align:center;">Absolutely，不落阁创始人，诞生于1996年2月14日，目前是一个码农，从事.NET开发。</p>
-                                        <h1>个人信息</h1>
-                                        <p>暂无</p>
+                                        <p style="text-align:center;">愿世间没有灾难，人民幸福安康</p>
                                         <h1>个人介绍</h1>
-                                        <p>一个没有故事的男同学，没什么介绍......</p>
-                                        <h1 style="text-align:center;">The End</h1>
+                                        <p>普普通通大学生</p>
+                                        <h1>社会主义核心价值观</h1>
+                                        <p>富强&nbsp;民主&nbsp;文明&nbsp;和谐<br/>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自由&nbsp;平等&nbsp;公正&nbsp;法治<br/>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;爱国&nbsp;敬业&nbsp;诚信&nbsp;友善</p>
+                                        <h1 style="text-align:center;">如果人人都献出一点爱</h1>
                                     </div>
                                 </fieldset>
                             </div>
                         </div><!--关于作者End-->
-                        <div class="layui-tab-item">
+                        <!--<div class="layui-tab-item">
                             <div class="aboutinfo">
                                 <div class="aboutinfo-figure">
                                     <img src="../images/handshake.png" alt="友情链接" />
@@ -169,7 +170,7 @@
                                     </div>
                                 </fieldset>
                             </div>
-                        </div><!--友情链接End-->
+                        </div>&lt;!&ndash;友情链接End&ndash;&gt;
                         <div class="layui-tab-item">
                             <div class="aboutinfo">
                                 <div class="aboutinfo-figure">
@@ -223,7 +224,7 @@
                                                         </div>
                                                         <p class="info"><span class="time">2017-03-18 18:26</span></p>
                                                     </div>
-                                                    <!-- 回复表单默认隐藏 -->
+                                                    &lt;!&ndash; 回复表单默认隐藏 &ndash;&gt;
                                                     <div class="replycontainer layui-hide">
                                                         <form class="layui-form" action="">
                                                             <div class="layui-form-item">
@@ -240,7 +241,7 @@
                                     </div>
                                 </fieldset>
                             </div>
-                        </div><!--留言墙End-->
+                        </div>&lt;!&ndash;留言墙End&ndash;&gt;-->
                     </div>
                 </div>
             </div>
@@ -248,10 +249,10 @@
     </div>
     <!-- 底部 -->
     <footer class="blog-footer">
-        <p><span>Copyright</span><span>&copy;</span><span>2017</span><a href="http://www.lyblogs.cn">不落阁</a><span>Design By LY</span></p>
-        <p><a href="http://www.miibeian.gov.cn/" target="_blank">蜀ICP备16029915号-1</a></p>
+        <p><span>Copyright</span><span>&copy;</span><span>2021</span>物资捐赠网<span>Design By HL</span></p>
+        <p><a href="http://www.baidu.com/" target="_blank">备案号***********</a></p>
     </footer>
-    <!--侧边导航-->
+    <!--&lt;!&ndash;侧边导航&ndash;&gt;
     <ul class="layui-nav layui-nav-tree layui-nav-side blog-nav-left layui-hide" lay-filter="nav">
         <li class="layui-nav-item">
             <a href="home.html"><i class="fa fa-home fa-fw"></i>&nbsp;网站首页</a>
@@ -268,16 +269,16 @@
         <li class="layui-nav-item layui-this">
             <a href="about.html"><i class="fa fa-info fa-fw"></i>&nbsp;关于本站</a>
         </li>
-    </ul>
+    </ul>-->
     <!--分享窗体-->
     <div class="blog-share layui-hide">
         <div class="blog-share-body">
             <div style="width: 200px;height:100%;">
                 <div class="bdsharebuttonbox">
-                    <a class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
-                    <a class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-                    <a class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-                    <a class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+                    <a class="bds_qzone" title="分享到QQ空间"></a>
+                    <a class="bds_tsina" title="分享到新浪微博"></a>
+                    <a class="bds_weixin" title="分享到微信"></a>
+                    <a class="bds_sqq" title="分享到QQ好友"></a>
                 </div>
             </div>
         </div>

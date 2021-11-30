@@ -1,13 +1,17 @@
 package com.hl.goods.controller;
 
+import com.hl.goods.bean.Comment;
 import com.hl.goods.bean.Needs;
 import com.hl.goods.bean.User;
 import com.hl.goods.dao.NeedsDao;
+import com.hl.goods.service.CommentService;
 import com.hl.goods.service.NeedsService;
 import com.hl.goods.service.UserService;
+import com.hl.goods.util.TimeEncode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -28,6 +32,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("homePage")
     public ModelAndView home(ModelAndView mv) {
@@ -54,33 +61,24 @@ public class UserController {
             return mv;
         }
         Needs need = needsService.findById(id);
+        List<Comment> comments = commentService.findByNeedId(id);
         mv.setViewName("user/detail");
         mv.addObject("need", need);
+        mv.addObject("comments", comments);
         mv.addObject("users", userService.findAll());
         return mv;
     }
 
-    @GetMapping("article")
-    public ModelAndView article(ModelAndView mv) {
+    @PostMapping("comment")
+    public ModelAndView comment(String editorContent, Integer id, ModelAndView mv) {
         User user = getUser();
         if (user == null) {
             mv.setViewName("/index");
             mv.addObject("error", "你还未登录，无法进行操作");
             return mv;
         }
-        mv.setViewName("user/article");
-        return mv;
-    }
-
-    @GetMapping("timeline")
-    public ModelAndView timeline(ModelAndView mv) {
-        User user = getUser();
-        if (user == null) {
-            mv.setViewName("/index");
-            mv.addObject("error", "你还未登录，无法进行操作");
-            return mv;
-        }
-        mv.setViewName("user/timeline");
+        commentService.save(editorContent, id, user.getId());
+        mv.setViewName("redirect:/user/detail?id=" + id);
         return mv;
     }
 
