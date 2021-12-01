@@ -4,6 +4,7 @@ import com.hl.goods.bean.Goods;
 import com.hl.goods.bean.User;
 import com.hl.goods.dao.GoodsDao;
 import com.hl.goods.dao.UserDao;
+import com.hl.goods.util.TimeEncode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.AccessType;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,12 @@ public class GoodsService {
             goods.addAll(goodsDao.findByUserId(user.getId()));
         }
         return goods;
+    }
+
+    public void save(Goods good, User user) {
+        good.setRec(0);
+        good.setCreateTime(TimeEncode.getTime());
+        good.setUserId(user.getId());
+        goodsDao.save(good);
     }
 }

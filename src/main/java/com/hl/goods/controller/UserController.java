@@ -1,10 +1,12 @@
 package com.hl.goods.controller;
 
 import com.hl.goods.bean.Comment;
+import com.hl.goods.bean.Goods;
 import com.hl.goods.bean.Needs;
 import com.hl.goods.bean.User;
 import com.hl.goods.dao.NeedsDao;
 import com.hl.goods.service.CommentService;
+import com.hl.goods.service.GoodsService;
 import com.hl.goods.service.NeedsService;
 import com.hl.goods.service.UserService;
 import com.hl.goods.util.TimeEncode;
@@ -36,6 +38,39 @@ public class UserController {
     @Autowired
     private CommentService commentService;
 
+    @Autowired
+    private GoodsService goodsService;
+
+
+    @GetMapping("addNeed")
+    public ModelAndView toAddNeed(ModelAndView mv) {
+        User user = getUser();
+        if (user == null) {
+            mv.setViewName("/index");
+            mv.addObject("error", "你还未登录，无法进行操作");
+            return mv;
+        }
+        mv.setViewName("user/addNeed");
+        return mv;
+    }
+
+    @PostMapping("addNeed")
+    public ModelAndView addNeed(Needs need, ModelAndView mv) {
+        User user = getUser();
+        if (user == null) {
+            mv.setViewName("/index");
+            mv.addObject("error", "你还未登录，无法进行操作");
+            return mv;
+        }
+        need.setSolved(0);
+        need.setCreateTime(TimeEncode.getTime());
+        need.setUserId(user.getId());
+        need.setChecked(0);
+        needsService.save(need);
+        mv.setViewName("redirect:/user/homePage");
+        return mv;
+    }
+
     @GetMapping("homePage")
     public ModelAndView home(ModelAndView mv) {
         User user = getUser();
@@ -44,7 +79,7 @@ public class UserController {
             mv.addObject("error", "你还未登录，无法进行操作");
             return mv;
         }
-        List<Needs> all = needsService.findAll();
+        List<Needs> all = needsService.findChecked(1);
         mv.addObject("needs", all);
         mv.addObject("users", userService.findAll());
         mv.setViewName("user/home");
@@ -94,6 +129,31 @@ public class UserController {
         return mv;
     }
 
+
+    @GetMapping("addGood")
+    public ModelAndView toAddGood(ModelAndView mv) {
+        User user = getUser();
+        if (user == null) {
+            mv.setViewName("/index");
+            mv.addObject("error", "你还未登录，无法进行操作");
+            return mv;
+        }
+        mv.setViewName("user/addGood");
+        return mv;
+    }
+
+    @PostMapping("addGood")
+    public ModelAndView addGood(Goods good, ModelAndView mv) {
+        User user = getUser();
+        if (user == null) {
+            mv.setViewName("/index");
+            mv.addObject("error", "你还未登录，无法进行操作");
+            return mv;
+        }
+        goodsService.save(good, user);
+        mv.setViewName("redirect:/user/homePage");
+        return mv;
+    }
 
     private User getUser(){
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();

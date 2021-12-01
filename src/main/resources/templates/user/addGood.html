@@ -1,0 +1,96 @@
+<!DOCTYPE html><html>
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>物资捐赠网</title>
+<link href="https://lib.baomitu.com/element-ui/2.10.1/theme-chalk/index.css" rel="stylesheet"/>
+<link href="http://lowcode.magicalcoder.com/magicalcoder/assets/drag/ui/magicalcoder/1.1.0/magicalcoder.css" rel="stylesheet"/>
+<!-- 如果要兼容ie8及以前版本 请打开注释--> <!-- <script src="http://www.magicalcoder.com/assets/ui/element/2.10.1/browser.min.js"></script><script src="http://www.magicalcoder.com/assets/ui/element/2.10.1/browser-polyfill.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/json3/3.3.3/json3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.6.0/echarts.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.6.0/extension/dataTool.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script src="https://lib.baomitu.com/element-ui/2.10.1/index.js"></script>
+<script src="http://www.magicalcoder.com/assets/js/common.js"></script>
+<script src="http://lowcode.magicalcoder.com/magicalcoder/assets/drag/ui/magicalcoder/1.1.0/magicalcoder.js"></script>
+<style>
+
+</style>
+
+</head>
+<body style="background-image:url('../../static/img/bg.png'); background-repeat: no-repeat; background-size: 1550px 800px">
+<div id="magicalDragScene" class="mc-root mc-ui-absolute-pane"><template>
+
+	<form action="/user/addGood" method="post">
+		<table style="width:35%; height: 300px; right: 0px; border-style: groove; border-width: 5px; position: absolute; left:32%; top: 40%;">
+			<tr>
+				<td style="text-align: center;" colspan="2">物资捐赠信息</td>
+			</tr>
+				<tr>
+					<td style="text-align: center; width: 20%" mcstyle="ab-unit:px">物品名称</td>
+					<td style="text-align: center;">
+						<input style="text-align: center; width: 80%" type="text" name="name" />
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: center; width: 20%">详细描述</td>
+					<td style="text-align: center;">
+						<input name="desc" style="text-align: center; width: 80%" type="text"/>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: center; width: 20%">物品数量</td>
+					<td style="text-align: center;">
+						<input name="count" style="text-align: center; width: 80%" type="text"/>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: center; width: 20%">邮寄地址</td>
+					<td style="text-align: center;">
+						<input name="location" style="text-align: center; width: 80%" type="text" placeholder="请尽可能详细的填写自己家的地址"/>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: center;" colspan="2">
+						<input style="text-align: center;" type="submit" value="提交信息"/>
+					</td>
+				</tr>
+			</table>
+		</form>
+</template></div>
+<script>
+//ajax库采用axios
+//调试:打开浏览器控制台(F12),在代码中某行增加 debugger 即可调试
+var vueData = {};
+var vueMethod = {focus : function (e) {try {_t.fastKey.focusElem(e);}catch(e) {}},/*别删我*/
+_tabClick : function(){setTimeout(function(){new McECharts().render();},200)}};
+var vueMounted = function(){}
+/*注意以上代码由系统维护,非专业人士请勿修改*/
+var myMethod = {}
+for (var key in myMethod) {
+    vueMethod[key] = myMethod[key];
+}
+var myMounted = null
+if(myMounted!==null){vueMounted=myMounted;}
+var myData = {}
+/*把您定义的数据覆盖布局器自动识别的变量,考虑到兼容性，请下载查看head中重写的assign方法*/
+Object.assign(vueData, myData);
+var _t = this;
+var Ctor = Vue.extend({
+    //提前绑定的变量
+    data: function() {
+        return vueData;
+    },
+    //页面加载完 会执行方法 可以做一些初始化操作
+    mounted: vueMounted,
+    /*当前页面绑定的方法集合 与布局器节点一一映射即可 参照element ui文档*/
+    methods: vueMethod
+});
+new Ctor().$mount('#magicalDragScene');
+//echarts自动初始化
+new McECharts().render();
+
+</script>
+</body>
+
+</html>
